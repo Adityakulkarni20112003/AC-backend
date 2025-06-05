@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-CORS(app)  # This will enable CORS for all routes and origins
+CORS(app, origins=["https://smart-ac-two.vercel.app"])  # Allow requests from Vercel frontend
 
 # Global variables to store model and feature info
 model_pipeline = None
