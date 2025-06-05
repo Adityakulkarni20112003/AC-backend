@@ -243,12 +243,11 @@ def internal_error(error):
     """Handle 500 errors."""
     return jsonify({'error': 'Internal server error'}), 500
 
+# Load the model when the application module is loaded (e.g., by Gunicorn)
+if not load_model():
+    logger.warning("Model could not be loaded at startup. Predictions will likely fail until the model file is present and the app is restarted.")
+
 if __name__ == '__main__':
-    # Load the model when the app starts
-    if not load_model():
-        print("WARNING: Could not load model. Please train the model first by running the training script.")
-        print("The API will start but predictions will fail until the model is loaded.")
-    
     # Run the Flask app
     print("Starting Flask API server...")
     print("API Documentation available at: http://localhost:5000/")
